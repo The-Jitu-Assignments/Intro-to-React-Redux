@@ -1,14 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePostAction } from "../redux/actions/postActions";
+import { deletePostAction, addLike, countLikes } from "../redux/actions/postActions";
 
 const PostsList = () => {
-    const { posts } = useSelector((state) => state.postState);
+    const { posts, likeCount } = useSelector((state) => state.postState);
+    console.log(likeCount);
+    console.log(posts);
     const dispatch = useDispatch();
 
     const handleDeletePost = (id) => {
         dispatch(deletePostAction(id));
+        dispatch(countLikes());
     };
+
+    const handleAddLike = (id) => {
+        dispatch(addLike(id))
+        dispatch(countLikes());
+    }
   
     return (
         <div className="bg-white max-w-2xl mx-auto my-10 p-6 rounded-lg">
@@ -19,7 +27,7 @@ const PostsList = () => {
                         <p>{post?.post}</p>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <button className="bg-green-400 text-white rounded-lg p-1">
+                        <button onClick={() => handleAddLike(post?.id)} className="bg-green-400 text-white rounded-lg p-1">
                             Like {post?.likes}
                         </button>
                         <button

@@ -1,2 +1,4 @@
 export const CREATE_POST_ACTION = "CREATE_POST_ACTION";
 export const DELETE_POST_ACTION = "DELETE_POST_ACTION";
+export const ADD_LIKE = 'ADD_LIKE';
+export const COUNT_LIKES = 'COUNT_LIKES';
